@@ -5,6 +5,153 @@ define({ api: [
     "title": "default",
     "name": "init",
     "group": "init",
+    "version": "0.1.2",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "field": "lang",
+            "optional": false,
+            "description": "<p>Двухбуквенный код языка</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "field": "sex",
+            "optional": false,
+            "description": "<p>Пол, для сбора БД юзеров</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "field": "country",
+            "optional": false,
+            "description": "<p>Пол, для сбора БД юзеров</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "field": "city",
+            "optional": false,
+            "description": "<p>Город, текстом</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Array",
+            "field": "app_friends",
+            "optional": false,
+            "description": "<p>Список ВК uid друзей пользователя, установивших приложение. Сервер не может его сам взять. Как вариант – список вообще всех друзей пользователя. Тогда на карте будут показываться больше друзей, т.к. будут показываться даже те, кто уже удалил игру.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "field": "first_name",
+            "optional": false,
+            "description": "<p>Имя</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "field": "last_name",
+            "optional": false,
+            "description": "<p>Фамилия</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "date",
+            "field": "birthdate",
+            "optional": false,
+            "description": "<p>Дата рождения ДД.ММ.ГГГГ</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Локаль",
+            "field": "locale",
+            "optional": false,
+            "description": "<p>key-value пары. В коте также грамматические правила прописываются в отдельной флешке и тут возвращается ссылка на нее. Вполне можно засунуть грамматические правила внутрь основной флешки. Неплохо бы сделать это (менеджер локалей) в форме отдельной swc библиотеки.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Массив Банковских Итемов",
+            "field": "bank",
+            "optional": false,
+            "description": "<p>Список всех итемов для покупки за голоса ВК – т.е. кучек внутриигровой валюты</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Юзер",
+            "field": "user",
+            "optional": false,
+            "description": "<p>Информация по текущему юзеру. Как минимум, нужно знать сколько у него денег и на каком он уровне - блокирует</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Массив Юзеров (ограниченный)",
+            "field": "friends",
+            "optional": false,
+            "description": "<p>Список друзей пользователя для отображения их прогресса в игре. Отправляются сразу все друзья в игре.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Массив Итемов",
+            "field": "items",
+            "optional": false,
+            "description": "<p>Все доступные в игре бусты, буффы и прочие вещи (бонусы к жизням, ходам). Здесь в отличие от магазина хранятся записи об игровых характеристиках итемов.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Объект с константами",
+            "field": "constants",
+            "optional": false,
+            "description": "<p>Все, что настраивается через админку и нужно клиенту</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Массив Зон",
+            "field": "zones",
+            "optional": false,
+            "description": "<p>Присылаем только зону, на которой сейчас юзер +- 1 зона (т.е. 2 или 3 зоны изначально)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Массив Lot",
+            "field": "shop",
+            "optional": false,
+            "description": "<p>Лоты из магазина</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Массив Targeting",
+            "field": "targeting",
+            "optional": false,
+            "description": "<p>Группы таргетинга и их критерии</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": "{\n\tlocale: {\n\t\t\"ru_RU\": {\n\t\t\t\"welcome.greeting1\": \"Привет, друг!\",\n\t\t\t\"welcome.greeting2\": \"Привет, дружище!\"\n\t\t}\n\t},\n\tbank: [\n\t\t{\n\t\t\tid: 1,\n\t\t\torder: 1,\n\t\t\tcoins: 5,\n\t\t\tvotes: 1,\n\t\t\tpic_url: \"/images/bank_item_01.png\"\n\t\t},\n\t\t{\n\t\t\tid: 2,\n\t\t\torder: 2,\n\t\t\tcoins: 15,\n\t\t\tvotes: 2,\n\t\t\tpic_url: \"/images/bank_item_02.png\"\n\t\t}\n\t],\n\tuser: {\n\t\tuid: 577098,\n\t\tboosts: [\n\t\t\t[12,2],\n\t\t\t[13,4],\n\t\t\t[15,1] // 2 буста №12, 4 буста №13 и 1 буст №15\n\t\t],\n\t\tbuffs: [\n\t\t\t[3,5],\n\t\t\t[4,7] // 5 бафов №3, и 7 бафов №4\n\t\t],\n\t\treg_date: 1416210047, // timestamp\n\t\tcoins: 70,\n\t\tlevel_progress: [\n\t\t\t[1001,5],\n\t\t\t[1002,10],\n\t\t\t[2001,305]\n\t\t],\n\t\tlives: {\n\t\t\tnow: 3,\n\t\t\tmax: 8, // максимум жизней\n\t\t\tunlim_mode: false, // режим бесконечных жизней\n\t\t\trc_timeout: 1416211047 // next life ReCreation timeout, когда восстановится следующая жизнь\n\t\t},\n\t\tbpc: 3, // bank purchase count, сколько раз покупал в банке\n\t\tvisits: 8, // сколько раз заходил в игру\n\t\ttype: 0, // 0 - игрок, 1 - админ, 2 - тестер\n\t\tmail: [\n\t\t\t{\n\t\t\t\tid: 1,\n\t\t\t\tsender: 87897, // id отправителя, 0 если от администрации, аватар берётся исходя из этого\n\t\t\t\ttext: \"Прива! Вот те от меня презент =)\",\n\t\t\t\ttype: 15, // код сообщения, типа \"тебе прислали жизнь\" или \"тебе прислали бустер\"\n\t\t\t\tcontent_icon: \"/icons/15.png\" // иконка кода содержимого, то есть типа если бустер прислали - иконка этого бустера\n\t\t\t}\n\t\t] \n\t},\n\tfriends: []\n\t\t{\n\t\t\tuid: 45768,\n\t\t\tlevel_progress: [\n\t\t\t\t[1001,5],\n\t\t\t\t[1002,10],\n\t\t\t\t[2001,305]\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\tuid: 457322,\n\t\t\tlevel_progress: [\n\t\t\t\t[1001,6],\n\t\t\t\t[1003,5],\n\t\t\t\t[2002,34]\n\t\t\t]\n\t\t}\n\t],\n\titems: [\n\t\t{\n\t\t\tid: 1,\n\t\t\tname: \"items.boost1\", // идентификатор локали\n\t\t\tdescription: \"items.boosts.description1\",\n\t\t\tpicture: \"/boosts/1.png\",\n\t\t\tvalue: 5, // для тех итемов, которые имеют численное значение\n\t\t\ttype: 1\n\t\t},\n\t\t...\n\t],\n\tconstants: {\n\t\tconstant1: 4,\n\t\tconstant2: \"some value\"\n\t},\n\tzones: [\n\t\t{\n\t\t\tid: 1,\n\t\t\tname: \"zone.names.1\",\n\t\t\tdescription: \"zone.description.1\",\n\t\t\tbackground: \"/zone/1000.png\",\n\t\t\tlevel_background: \"/zone/1100.png\", // короче это url\n\t\t\toverlay: {}, // TODO: об этом - позже\n\t\t\tlevels: [\n\t\t\t\t{\n\t\t\t\t\tid: 1001,\n\t\t\t\t\titems: [[1,3],[2,4],[3,0]], // итем №1 можно юзать 3 раза максимум, ..., №3 - бесконечное число раз\n\t\t\t\t\tcolors: 5, // число цветов на уровне\n\t\t\t\t\ttrigger: [[1,5],[3,8]], // пары критерий - значение, критерий №1 - 5 штук (к примеру набрать 5 очков) и т.д.; TODO: список критериев\n\t\t\t\t\tfield: {\n\t\t\t\t\t\tsizeX: 3,\n\t\t\t\t\t\tsizeY: 3,\n\t\t\t\t\t\tdata: byte_array // массив байт\n\t\t\t\t\t},\n\t\t\t\t\tstars: [5,15,50], // очки на одну, две, три звезды\n\t\t\t\t\tlimits: {\n\t\t\t\t\t\ttime: 300, // в секундах\n\t\t\t\t\t\tturns: 20 // кол-во ходов\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t...\n\t\t\t]\n\t\t}\n\t],\n\tshop: [\n\t\t{\n\t\t\tid: 1,\n\t\t\tname: \"shop.name.1\",\n\t\t\tdescription: \"shop.desc.1\",\n\t\t\tpicture: \"shop/1.png\",\n\t\t\torder: 1,\n\t\t\tcond: [[1,5],[2,3]], // условия для показа. Массив пар тип-значение\n\t\t\tcoins: 5, // цена во внутриигровой валюте\n\t\t}\n\t],\n\ttargeting:{\n\t\t// TODO: определить этот тип\n\t}\n}\n",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./controllers/InitController.php"
+  },
+  {
+    "type": "get",
+    "url": "/init",
+    "title": "default",
+    "name": "init",
+    "group": "init",
     "version": "0.1.1",
     "parameter": {
       "fields": {
@@ -144,7 +291,7 @@ define({ api: [
         }
       ]
     },
-    "filename": "controllers/InitController.php"
+    "filename": "./controllers/_InitController.php"
   },
   {
     "type": "get",
@@ -194,7 +341,7 @@ define({ api: [
         }
       ]
     },
-    "filename": "controllers/LevelController.php"
+    "filename": "./controllers/LevelController.php"
   },
   {
     "type": "get",
@@ -251,7 +398,7 @@ define({ api: [
         }
       ]
     },
-    "filename": "controllers/LevelController.php"
+    "filename": "./controllers/LevelController.php"
   },
   {
     "type": "get",
@@ -301,7 +448,7 @@ define({ api: [
         }
       ]
     },
-    "filename": "controllers/LevelController.php"
+    "filename": "./controllers/LevelController.php"
   },
   {
     "type": "get",
@@ -351,7 +498,7 @@ define({ api: [
         }
       ]
     },
-    "filename": "controllers/LevelController.php"
+    "filename": "./controllers/LevelController.php"
   },
   {
     "type": "get",
@@ -380,7 +527,7 @@ define({ api: [
         }
       ]
     },
-    "filename": "controllers/MailController.php"
+    "filename": "./controllers/MailController.php"
   },
   {
     "type": "get",
@@ -430,7 +577,7 @@ define({ api: [
         }
       ]
     },
-    "filename": "controllers/MailController.php"
+    "filename": "./controllers/MailController.php"
   },
   {
     "type": "get",
@@ -491,7 +638,7 @@ define({ api: [
         ]
       }
     },
-    "filename": "controllers/MailController.php"
+    "filename": "./controllers/MailController.php"
   },
   {
     "type": "get",
@@ -540,7 +687,7 @@ define({ api: [
         }
       ]
     },
-    "filename": "controllers/ShopController.php"
+    "filename": "./controllers/ShopController.php"
   },
   {
     "type": "get",
@@ -583,6 +730,6 @@ define({ api: [
         }
       ]
     },
-    "filename": "controllers/ZoneController.php"
+    "filename": "./controllers/ZoneController.php"
   }
 ] });
