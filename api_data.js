@@ -1,11 +1,11 @@
 define({ api: [
   {
-    "type": "get",
+    "type": "post",
     "url": "/init",
     "title": "default",
     "name": "init",
     "group": "init",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "parameter": {
       "fields": {
         "Parameter": [
