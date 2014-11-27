@@ -1,6 +1,43 @@
 define({ api: [
   {
     "type": "post",
+    "url": "/bank/balance",
+    "title": "balance",
+    "name": "balance",
+    "group": "bank",
+    "version": "0.1.6",
+    "description": "<p>Вызывается клиентом для обновления баланса пользователя в игровой валюте.</p>",
+    "examples": [
+      {
+        "title": "Пример запроса:",
+        "content": "Пример запроса:\n{\n\tuid: 588930,\n\tauth_key: 2c01c44ec206a65c99ffb0d3ee3bad63\n}\n",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Юзер",
+            "field": "user",
+            "optional": false,
+            "description": "<p>Юзер с одним только полем (не считая общих, типа почты) – количеством валюты</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Пример ответа:",
+          "content": "Пример ответа:\n{\n\tresponse: {\n\t\tdata: {\n\t\t\tuser: {\n\t\t\t\tcoins: 78,\n\t\t\t\tmail: [ // почта юзера, если она обновилась\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1,\n\t\t\t\t\t\tsender: 87897, // id отправителя, 0 если от администрации, аватар берётся исходя из этого\n\t\t\t\t\t\ttext: \"Прива! Вот те от меня презент =)\",\n\t\t\t\t\t\ttype: 15, // код сообщения, типа \"тебе прислали жизнь\" или \"тебе прислали бустер\"\n\t\t\t\t\t\tcontent_icon: \"/icons/15.png\" // иконка кода содержимого, то есть типа если бустер прислали - иконка этого бустера\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t},\n\t\t\ttimestamp: 1416229351\n\t\t}\n\t}\n}\n",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./controllers/BankController.php"
+  },
+  {
+    "type": "post",
     "url": "/bank/getBalance",
     "title": "getBalance",
     "name": "getBalance",
@@ -34,7 +71,7 @@ define({ api: [
         }
       ]
     },
-    "filename": "./controllers/BankController.php"
+    "filename": "./controllers/_BankController.php"
   },
   {
     "type": "post",
