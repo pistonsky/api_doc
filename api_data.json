@@ -1864,8 +1864,8 @@
     "title": "fail",
     "name": "fail",
     "group": "level",
-    "version": "0.2.0",
-    "description": "<p>Игрок завалил уровень. Уведомить сервер об этом.</p>",
+    "version": "0.2.6",
+    "description": "<p>Игрок завалил уровень. Уведомить сервер об этом, чтобы он внес этот факт в лог.</p>",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -1879,9 +1879,30 @@
           {
             "group": "Parameter",
             "type": "int",
+            "field": "score",
+            "optional": false,
+            "description": "<p>Сколько очков было к моменту проигрыша, необязательный параметр, чисто для лога</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "field": "add_turns",
+            "optional": false,
+            "description": "<p>Необязательный параметр, по-умолчанию 0. Получал ли доп. игровые ходы (0 - не покупал, 1 - покупал только ходы, 2 - купил ходы с бонусом, 3 - получил бесплатно за приглашение друга)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
             "field": "reason",
             "optional": false,
             "description": "<p>Причина проигрыша. Игрок может покинуть уровень сам. На некоторых уровнях он может проиграть по разным причинам. Полезно знать, почему проигрывают тот или иной уровень. Значение поля int enumeration 0 – вышел сам 1 – кончились ходы 2 – кончилось время Пока вроде все, надо знать механики (например – взорвалась бомба с таймером). Всё это описано в специальной карточке trello</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "field": "sid",
+            "optional": false,
+            "description": "<p>Номер сессии</p>"
           }
         ]
       }
@@ -1889,7 +1910,7 @@
     "examples": [
       {
         "title": "Пример запроса:",
-        "content": "Пример запроса:\n{\n\tuid: 3458973,\n\tauth_key: 2c01c44ec206a65c99ffb0d3ee3bad63,\n\tlevel_id: 1001,\n\treason: 1\n}\n",
+        "content": "Пример запроса:\n{\n\tuid: 3458973,\n\tauth_key: 2c01c44ec206a65c99ffb0d3ee3bad63,\n\tlevel_id: 1001,\n\tscore: 1001,\n\tadd_turns: 0,\n\treason: 1\n}\n",
         "type": "json"
       }
     ],
@@ -2455,6 +2476,91 @@
     "title": "success",
     "name": "success",
     "group": "level",
+    "version": "0.2.6",
+    "description": "<p>Игрок выиграл уровень. Уведомить сервер об этом. В случае обновления рекорда сервер присылает весь level_progress</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "field": "level_id",
+            "optional": false,
+            "description": "<p>Номер уровня</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "field": "score",
+            "optional": false,
+            "description": "<p>Набранное кол-во очков</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "field": "add_turns",
+            "optional": false,
+            "description": "<p>Необязательный параметр. Докупал ли игрок доп. ходы в течение игры. 0 - не покупал, 1 - покупал только ходы, 2 - купил ходы с бонусом, 3 - получил бесплатно за приглашение друга</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "field": "boosts",
+            "optional": false,
+            "description": "<p>Необязательный параметр. Какие бусты игрок искользовал на уровне</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "field": "buffs",
+            "optional": false,
+            "description": "<p>Необязательный параметр. Какие бафы игрок брал на уровнеь</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "field": "sid",
+            "optional": false,
+            "description": "<p>Номер сессии</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Пример запроса:",
+        "content": "Пример запроса:\n{\n\tuid: 67829891,\n\tauth_key: 2c01c44ec206a65c99ffb0d3ee3bad63,\n\tlevel_id: 1001,\n\tscore: 57,\n\tadd_turns: 1,\n\tboosts: [{\"id\":1001,\"count\":2}],\n\tbuffs: [{\"id\":1001,\"count\":2}],\n\tscore: 57,\n\tsid: 47\n}\n",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "field": "success",
+            "optional": false,
+            "description": "<p>is always true. Ответ обрабатывать надо, т.к. тут сервер может прислать ошибку о том, что юзер не мог пройти этот уровень (подделал запрос)</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": "{\n\tresponse: {\n\t\tdata: {\n\t\t\tsuccess: true,\n\t\t\ttimestamp: 1416229351,\n\t\t\tuser: {\n\t\t\t\tlevel_progress: [\t// если рекорд был побит - присылаю обновленный level_progress\n\t\t\t\t\t[1001,1,5],\n\t\t\t\t\t[1002,2,10],\n\t\t\t\t\t[2001,3,305] // id, stars, score\n\t\t\t\t],\n\t\t\t\tmail: [ // почта только если пришло новое письмо\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1,\n\t\t\t\t\t\tsender: 87897, // id отправителя, 0 если от администрации, аватар берётся исходя из этого\n\t\t\t\t\t\ttext: \"Прива! Вот те от меня презент =)\",\n\t\t\t\t\t\ttype: 15, // код сообщения, типа \"тебе прислали жизнь\" или \"тебе прислали бустер\"\n\t\t\t\t\t\tcontent_icon: \"/icons/15.png\" // иконка кода содержимого, то есть типа если бустер прислали - иконка этого бустера\n\t\t\t\t\t}\n\t\t\t\t] \n\t\t\t}\n\t\t}\n\t}\n}\n",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./controllers/LevelController.php"
+  },
+  {
+    "type": "post",
+    "url": "/level/success",
+    "title": "success",
+    "name": "success",
+    "group": "level",
     "version": "0.2.0",
     "description": "<p>Игрок выиграл уровень. Уведомить сервер об этом.</p>",
     "parameter": {
@@ -2504,7 +2610,7 @@
         }
       ]
     },
-    "filename": "./controllers/LevelController.php"
+    "filename": "./controllers/_LevelController.php"
   },
   {
     "type": "post",
@@ -2733,7 +2839,7 @@
     "title": "use",
     "name": "use",
     "group": "level",
-    "version": "0.2.0",
+    "version": "0.2.6",
     "description": "<p>Юзер использовал итем</p>",
     "parameter": {
       "fields": {
@@ -2751,6 +2857,13 @@
             "field": "item_id",
             "optional": false,
             "description": "<p>ID использованного буста</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "field": "sid",
+            "optional": false,
+            "description": "<p>Номер сессии</p>"
           }
         ]
       }
@@ -2834,7 +2947,7 @@
       "examples": [
         {
           "title": "{",
-          "content": "{\n\tresponse: {\n\t\tdata: {\n\t\t\tuser: {\n\t\t\t\tlives: {\n\t\t\t\t\tnow: 3,\n\t\t\t\t\tunlim_mode: false, // режим бесконечных жизней\n\t\t\t\t\trc_timeout: 1416211047 // next life ReCreation timeout, когда восстановится следующая жизнь\n\t\t\t\t},\n\t\t\t\tboosts: [\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 12,\n\t\t\t\t\t\tcount: 2\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 13,\n\t\t\t\t\t\tcount: 4\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 15,\n\t\t\t\t\t\tcount: 1\n\t\t\t\t\t}\n\t\t\t\t],\n\t\t\t\tmail: [ // только если юзер получил новую почту\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1,\n\t\t\t\t\t\tsender: 87897, // id отправителя, 0 если от администрации, аватар берётся исходя из этого\n\t\t\t\t\t\ttext: \"Прива! Вот те от меня презент =)\",\n\t\t\t\t\t\ttype: 15, // код сообщения, типа \"тебе прислали жизнь\" или \"тебе прислали бустер\"\n\t\t\t\t\t\tcontent_icon: \"/icons/15.png\" // иконка кода содержимого, то есть типа если бустер прислали - иконка этого бустера\n\t\t\t\t\t}\n\t\t\t\t] \n\t\t\t},\n\t\t\ttimestamp: 1416229351\n\t\t}\n\t}\n}\n",
+          "content": "{\n\tresponse: {\n\t\tdata: {\n\t\t\tuser: {\n\t\t\t\tlives: {\n\t\t\t\t\tnow: 3,\n\t\t\t\t\tunlim_mode: false, // режим бесконечных жизней\n\t\t\t\t\trc_timeout: 1416211047 // next life ReCreation timeout, когда восстановится следующая жизнь\n\t\t\t\t},\n\t\t\t\tboosts: [\n\t\t\t\t\t[12,2],\n\t\t\t\t\t[13,4],\n\t\t\t\t\t[15,1] // 2 буста №12, 4 буста №13 и 1 буст №15\n\t\t\t\t],\n\t\t\t\tmail: [ // только если юзер получил новую почту\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1,\n\t\t\t\t\t\tsender: 87897, // id отправителя, 0 если от администрации, аватар берётся исходя из этого\n\t\t\t\t\t\ttext: \"Прива! Вот те от меня презент =)\",\n\t\t\t\t\t\ttype: 15, // код сообщения, типа \"тебе прислали жизнь\" или \"тебе прислали бустер\"\n\t\t\t\t\t\tcontent_icon: \"/icons/15.png\" // иконка кода содержимого, то есть типа если бустер прислали - иконка этого бустера\n\t\t\t\t\t}\n\t\t\t\t] \n\t\t\t},\n\t\t\ttimestamp: 1416229351\n\t\t}\n\t}\n}\n",
           "type": "json"
         }
       ]
@@ -2891,7 +3004,7 @@
       "examples": [
         {
           "title": "{",
-          "content": "{\n\tresponse: {\n\t\tdata: {\n\t\t\tuser: {\n\t\t\t\tlives: {\n\t\t\t\t\tnow: 3,\n\t\t\t\t\tunlim_mode: false, // режим бесконечных жизней\n\t\t\t\t\trc_timeout: 1416211047 // next life ReCreation timeout, когда восстановится следующая жизнь\n\t\t\t\t},\n\t\t\t\tboosts: [\n\t\t\t\t\t[12,2],\n\t\t\t\t\t[13,4],\n\t\t\t\t\t[15,1] // 2 буста №12, 4 буста №13 и 1 буст №15\n\t\t\t\t],\n\t\t\t\tmail: [ // только если юзер получил новую почту\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1,\n\t\t\t\t\t\tsender: 87897, // id отправителя, 0 если от администрации, аватар берётся исходя из этого\n\t\t\t\t\t\ttext: \"Прива! Вот те от меня презент =)\",\n\t\t\t\t\t\ttype: 15, // код сообщения, типа \"тебе прислали жизнь\" или \"тебе прислали бустер\"\n\t\t\t\t\t\tcontent_icon: \"/icons/15.png\" // иконка кода содержимого, то есть типа если бустер прислали - иконка этого бустера\n\t\t\t\t\t}\n\t\t\t\t] \n\t\t\t},\n\t\t\ttimestamp: 1416229351\n\t\t}\n\t}\n}\n",
+          "content": "{\n\tresponse: {\n\t\tdata: {\n\t\t\tuser: {\n\t\t\t\tlives: {\n\t\t\t\t\tnow: 3,\n\t\t\t\t\tunlim_mode: false, // режим бесконечных жизней\n\t\t\t\t\trc_timeout: 1416211047 // next life ReCreation timeout, когда восстановится следующая жизнь\n\t\t\t\t},\n\t\t\t\tboosts: [\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 12,\n\t\t\t\t\t\tcount: 2\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 13,\n\t\t\t\t\t\tcount: 4\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 15,\n\t\t\t\t\t\tcount: 1\n\t\t\t\t\t}\n\t\t\t\t],\n\t\t\t\tmail: [ // только если юзер получил новую почту\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1,\n\t\t\t\t\t\tsender: 87897, // id отправителя, 0 если от администрации, аватар берётся исходя из этого\n\t\t\t\t\t\ttext: \"Прива! Вот те от меня презент =)\",\n\t\t\t\t\t\ttype: 15, // код сообщения, типа \"тебе прислали жизнь\" или \"тебе прислали бустер\"\n\t\t\t\t\t\tcontent_icon: \"/icons/15.png\" // иконка кода содержимого, то есть типа если бустер прислали - иконка этого бустера\n\t\t\t\t\t}\n\t\t\t\t] \n\t\t\t},\n\t\t\ttimestamp: 1416229351\n\t\t}\n\t}\n}\n",
           "type": "json"
         }
       ]
@@ -3386,6 +3499,12 @@
           },
           {
             "group": "Error 4xx",
+            "field": "IncorrectFormat",
+            "optional": false,
+            "description": "<p>Неверный формат параметра drop_json: проверьте, есть ли кавычки вокруг &quot;id&quot; и &quot;count&quot;</p>"
+          },
+          {
+            "group": "Error 4xx",
             "field": "UserNotFound",
             "optional": false,
             "description": "<p>uid, который был передан, не был найден в таблице пользователей. Такого быть не должно, лучший выход - полать запрос init который создаст пустого юзера заново</p>"
@@ -3618,6 +3737,101 @@
     "title": "buy",
     "name": "buy",
     "group": "shop",
+    "version": "0.2.6",
+    "description": "<p>Покупка итемов в магазине за игровую валюту.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "field": "item_id",
+            "optional": false,
+            "description": "<p>ID итема из магазнина</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "field": "count",
+            "optional": false,
+            "description": "<p>кол-во (опционально)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "field": "level_id",
+            "optional": false,
+            "description": "<p>Если покупка осуществляется на уровне, то id уровня для статистики</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "field": "items",
+            "optional": false,
+            "description": "<p>список итемов в виде id:count,id:count - если задан, тогда item_id и count игнорируются</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Пример запроса:",
+        "content": "Пример запроса:\n{\n\tuid: 6772942,\n\tauth_key: 2c01c44ec206a65c99ffb0d3ee3bad63,\n\titem_id: 1005,\n\tcount: 3,\n\tlevel_id: 1001\n}\n",
+        "type": "json"
+      },
+      {
+        "title": "Пример запроса с параметром items:",
+        "content": "Пример запроса с параметром items:\n{\n\tuid: 6772942,\n\tauth_key: 2c01c44ec206a65c99ffb0d3ee3bad63,\n\titems: \"1005:3,1006:1\",\n\tlevel_id: 1001\n}\n",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Юзер, ограниченный",
+            "field": "user",
+            "optional": false,
+            "description": "<p>Обновились итемы игрока</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Пример ответа:",
+          "content": "Пример ответа:\n{\n\tresponse: {\n\t\tdata: {\n\t\t\tuser: {\n\t\t\t\tlives: {\n\t\t\t\t\tnow: 3,\n\t\t\t\t\tunlim_mode: false, // режим бесконечных жизней\n\t\t\t\t\tnext_life_time: 1416211047 // next life ReCreation timeout, когда восстановится следующая жизнь\n\t\t\t\t},\n\t\t\t\titems: [ // массив итемов уже включает в себя баффы, бусты, жизни и другие разновидности итемов\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1002,\n\t\t\t\t\t\tcount: 2\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 2003,\n\t\t\t\t\t\tcount: 4\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 3001,\n\t\t\t\t\t\tcount: 1\n\t\t\t\t\t}\n\t\t\t\t],\n\t\t\t\tcoins: 70,\n\t\t\t\tmail: [\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1,\n\t\t\t\t\t\tsender: 87897, // id отправителя, 0 если от администрации, аватар берётся исходя из этого\n\t\t\t\t\t\ttext: \"Прива! Вот те от меня презент =)\",\n\t\t\t\t\t\ttype: 15, // код сообщения, типа \"тебе прислали жизнь\" или \"тебе прислали бустер\"\n\t\t\t\t\t\tcontent_icon: \"/icons/15.png\" // иконка кода содержимого, то есть типа если бустер прислали - иконка этого бустера\n\t\t\t\t\t}\n\t\t\t\t] \n\t\t\t},\n\t\t\ttimestamp: 1416229351\n\t\t}\n\t}\n}\n",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "field": "NotEnoughCoins",
+            "optional": false,
+            "description": "<ul><li>надостаточно монет у игрока. Клиент должен показать игроку банк, где он сможет докупить монеты.</li></ul>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Пример ответа в случае нехватки монет у игрока:",
+          "content": "Пример ответа в случае нехватки монет у игрока:\n{\n\terror: {\n\t\tcode: NotEnoughCoins, // константа\n\t\tmsg: \"Not enough coins.\"\n\t}\n}\n",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./controllers/ShopController.php"
+  },
+  {
+    "type": "post",
+    "url": "/shop/buy",
+    "title": "buy",
+    "name": "buy",
+    "group": "shop",
     "version": "0.2.0",
     "description": "<p>Покупка итемов в магазине за игровую валюту.</p>",
     "parameter": {
@@ -3686,7 +3900,7 @@
         }
       ]
     },
-    "filename": "./controllers/ShopController.php"
+    "filename": "./controllers/_ShopController.php"
   },
   {
     "type": "post",
