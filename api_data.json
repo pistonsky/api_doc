@@ -2316,7 +2316,7 @@
     "examples": [
       {
         "title": "Пример запроса:",
-        "content": "Пример запроса:\n{\n\tuid: 676763081,\n\tauth_key: 2c01c44ec206a65c99ffb0d3ee3bad63,\n\tlevel_id: 1001,\n\tbuffs: [[1,1],[2,1],[3,5]] // Игрок взял один бафф №1, один бафф №2, и пять баффов №3\n}\n",
+        "content": "Пример запроса:\n{\n\tlevel_id: 1001,\n\tbuffs: [[1,1],[2,1],[3,5]] // Игрок взял один бафф №1, один бафф №2, и пять баффов №3\n}\n",
         "type": "json"
       }
     ],
@@ -2342,7 +2342,7 @@
       "examples": [
         {
           "title": "\t{",
-          "content": "\t{\n\tresponse: {\n\t\tdata: {\n\t\t\tuser: {\n\t\t\t\tbuffs: [\n\t\t\t\t\t[3,5],\n\t\t\t\t\t[4,7] // 5 бафов №3, и 7 бафов №4\n\t\t\t\t],\n\t\t\t\tcoins: 70,\n\t\t\t\tlives: {\n\t\t\t\t\tnow: 3,\n\t\t\t\t\tunlim_mode: false, // режим бесконечных жизней\n\t\t\t\t\trc_timeout: 1416211047 // next life ReCreation timeout, когда восстановится следующая жизнь\n\t\t\t\t},\n\t\t\t\tmail: [ // почта только если пришло новое письмо\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1,\n\t\t\t\t\t\tsender: 87897, // id отправителя, 0 если от администрации, аватар берётся исходя из этого\n\t\t\t\t\t\ttext: \"Прива! Вот те от меня презент =)\",\n\t\t\t\t\t\ttype: 15, // код сообщения, типа \"тебе прислали жизнь\" или \"тебе прислали бустер\"\n\t\t\t\t\t\tcontent_icon: \"/icons/15.png\" // иконка кода содержимого, то есть типа если бустер прислали - иконка этого бустера\n\t\t\t\t\t}\n\t\t\t\t] \n\t\t\t},\n\t\t\tattempt: 1,\n\t\t\ttimestamp: 1416229351\n\t\t}\n\t}\n}\n",
+          "content": "\t{\n\tresponse: {\n\t\tdata: {\n\t\t\tuser: {\n\t\t\t\tbuffs: [\n\t\t\t\t\t[3,5],\n\t\t\t\t\t[4,7] // 5 бафов №3, и 7 бафов №4\n\t\t\t\t],\n\t\t\t\tcoins: 70,\n\t\t\t\tlives: {\n\t\t\t\t\tnow: 3,\n\t\t\t\t\tmax: 8, // максимум жизней\n\t\t\t\t\tunlim_mode: false, // режим бесконечных жизней\n\t\t\t\t\trc_timeout: 1416211047 // next life ReCreation timeout, когда восстановится следующая жизнь\n\t\t\t\t},\n\t\t\t\tmail: [\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1,\n\t\t\t\t\t\tsender: 87897, // id отправителя, 0 если от администрации, аватар берётся исходя из этого\n\t\t\t\t\t\ttext: \"Прива! Вот те от меня презент =)\",\n\t\t\t\t\t\ttype: 15, // код сообщения, типа \"тебе прислали жизнь\" или \"тебе прислали бустер\"\n\t\t\t\t\t\tcontent_icon: \"/icons/15.png\" // иконка кода содержимого, то есть типа если бустер прислали - иконка этого бустера\n\t\t\t\t\t}\n\t\t\t\t] \n\t\t\t},\n\t\t\tattempt: 1\n\t\t}\n\t}\n}\n",
           "type": "json"
         }
       ]
@@ -2380,7 +2380,7 @@
     "examples": [
       {
         "title": "Пример запроса:",
-        "content": "Пример запроса:\n{\n\tlevel_id: 1001,\n\tbuffs: [[1,1],[2,1],[3,5]] // Игрок взял один бафф №1, один бафф №2, и пять баффов №3\n}\n",
+        "content": "Пример запроса:\n{\n\tuid: 676763081,\n\tauth_key: 2c01c44ec206a65c99ffb0d3ee3bad63,\n\tlevel_id: 1001,\n\tbuffs: [[1,1],[2,1],[3,5]] // Игрок взял один бафф №1, один бафф №2, и пять баффов №3\n}\n",
         "type": "json"
       }
     ],
@@ -2406,7 +2406,7 @@
       "examples": [
         {
           "title": "\t{",
-          "content": "\t{\n\tresponse: {\n\t\tdata: {\n\t\t\tuser: {\n\t\t\t\tbuffs: [\n\t\t\t\t\t[3,5],\n\t\t\t\t\t[4,7] // 5 бафов №3, и 7 бафов №4\n\t\t\t\t],\n\t\t\t\tcoins: 70,\n\t\t\t\tlives: {\n\t\t\t\t\tnow: 3,\n\t\t\t\t\tmax: 8, // максимум жизней\n\t\t\t\t\tunlim_mode: false, // режим бесконечных жизней\n\t\t\t\t\trc_timeout: 1416211047 // next life ReCreation timeout, когда восстановится следующая жизнь\n\t\t\t\t},\n\t\t\t\tmail: [\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1,\n\t\t\t\t\t\tsender: 87897, // id отправителя, 0 если от администрации, аватар берётся исходя из этого\n\t\t\t\t\t\ttext: \"Прива! Вот те от меня презент =)\",\n\t\t\t\t\t\ttype: 15, // код сообщения, типа \"тебе прислали жизнь\" или \"тебе прислали бустер\"\n\t\t\t\t\t\tcontent_icon: \"/icons/15.png\" // иконка кода содержимого, то есть типа если бустер прислали - иконка этого бустера\n\t\t\t\t\t}\n\t\t\t\t] \n\t\t\t},\n\t\t\tattempt: 1\n\t\t}\n\t}\n}\n",
+          "content": "\t{\n\tresponse: {\n\t\tdata: {\n\t\t\tuser: {\n\t\t\t\tbuffs: [\n\t\t\t\t\t[3,5],\n\t\t\t\t\t[4,7] // 5 бафов №3, и 7 бафов №4\n\t\t\t\t],\n\t\t\t\tcoins: 70,\n\t\t\t\tlives: {\n\t\t\t\t\tnow: 3,\n\t\t\t\t\tunlim_mode: false, // режим бесконечных жизней\n\t\t\t\t\trc_timeout: 1416211047 // next life ReCreation timeout, когда восстановится следующая жизнь\n\t\t\t\t},\n\t\t\t\tmail: [ // почта только если пришло новое письмо\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1,\n\t\t\t\t\t\tsender: 87897, // id отправителя, 0 если от администрации, аватар берётся исходя из этого\n\t\t\t\t\t\ttext: \"Прива! Вот те от меня презент =)\",\n\t\t\t\t\t\ttype: 15, // код сообщения, типа \"тебе прислали жизнь\" или \"тебе прислали бустер\"\n\t\t\t\t\t\tcontent_icon: \"/icons/15.png\" // иконка кода содержимого, то есть типа если бустер прислали - иконка этого бустера\n\t\t\t\t\t}\n\t\t\t\t] \n\t\t\t},\n\t\t\tattempt: 1,\n\t\t\ttimestamp: 1416229351\n\t\t}\n\t}\n}\n",
           "type": "json"
         }
       ]
@@ -2947,7 +2947,7 @@
       "examples": [
         {
           "title": "{",
-          "content": "{\n\tresponse: {\n\t\tdata: {\n\t\t\tuser: {\n\t\t\t\tlives: {\n\t\t\t\t\tnow: 3,\n\t\t\t\t\tunlim_mode: false, // режим бесконечных жизней\n\t\t\t\t\trc_timeout: 1416211047 // next life ReCreation timeout, когда восстановится следующая жизнь\n\t\t\t\t},\n\t\t\t\tboosts: [\n\t\t\t\t\t[12,2],\n\t\t\t\t\t[13,4],\n\t\t\t\t\t[15,1] // 2 буста №12, 4 буста №13 и 1 буст №15\n\t\t\t\t],\n\t\t\t\tmail: [ // только если юзер получил новую почту\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1,\n\t\t\t\t\t\tsender: 87897, // id отправителя, 0 если от администрации, аватар берётся исходя из этого\n\t\t\t\t\t\ttext: \"Прива! Вот те от меня презент =)\",\n\t\t\t\t\t\ttype: 15, // код сообщения, типа \"тебе прислали жизнь\" или \"тебе прислали бустер\"\n\t\t\t\t\t\tcontent_icon: \"/icons/15.png\" // иконка кода содержимого, то есть типа если бустер прислали - иконка этого бустера\n\t\t\t\t\t}\n\t\t\t\t] \n\t\t\t},\n\t\t\ttimestamp: 1416229351\n\t\t}\n\t}\n}\n",
+          "content": "{\n\tresponse: {\n\t\tdata: {\n\t\t\tuser: {\n\t\t\t\tlives: {\n\t\t\t\t\tnow: 3,\n\t\t\t\t\tunlim_mode: false, // режим бесконечных жизней\n\t\t\t\t\trc_timeout: 1416211047 // next life ReCreation timeout, когда восстановится следующая жизнь\n\t\t\t\t},\n\t\t\t\tboosts: [\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 12,\n\t\t\t\t\t\tcount: 2\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 13,\n\t\t\t\t\t\tcount: 4\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 15,\n\t\t\t\t\t\tcount: 1\n\t\t\t\t\t}\n\t\t\t\t],\n\t\t\t\tmail: [ // только если юзер получил новую почту\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1,\n\t\t\t\t\t\tsender: 87897, // id отправителя, 0 если от администрации, аватар берётся исходя из этого\n\t\t\t\t\t\ttext: \"Прива! Вот те от меня презент =)\",\n\t\t\t\t\t\ttype: 15, // код сообщения, типа \"тебе прислали жизнь\" или \"тебе прислали бустер\"\n\t\t\t\t\t\tcontent_icon: \"/icons/15.png\" // иконка кода содержимого, то есть типа если бустер прислали - иконка этого бустера\n\t\t\t\t\t}\n\t\t\t\t] \n\t\t\t},\n\t\t\ttimestamp: 1416229351\n\t\t}\n\t}\n}\n",
           "type": "json"
         }
       ]
@@ -3004,7 +3004,7 @@
       "examples": [
         {
           "title": "{",
-          "content": "{\n\tresponse: {\n\t\tdata: {\n\t\t\tuser: {\n\t\t\t\tlives: {\n\t\t\t\t\tnow: 3,\n\t\t\t\t\tunlim_mode: false, // режим бесконечных жизней\n\t\t\t\t\trc_timeout: 1416211047 // next life ReCreation timeout, когда восстановится следующая жизнь\n\t\t\t\t},\n\t\t\t\tboosts: [\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 12,\n\t\t\t\t\t\tcount: 2\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 13,\n\t\t\t\t\t\tcount: 4\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 15,\n\t\t\t\t\t\tcount: 1\n\t\t\t\t\t}\n\t\t\t\t],\n\t\t\t\tmail: [ // только если юзер получил новую почту\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1,\n\t\t\t\t\t\tsender: 87897, // id отправителя, 0 если от администрации, аватар берётся исходя из этого\n\t\t\t\t\t\ttext: \"Прива! Вот те от меня презент =)\",\n\t\t\t\t\t\ttype: 15, // код сообщения, типа \"тебе прислали жизнь\" или \"тебе прислали бустер\"\n\t\t\t\t\t\tcontent_icon: \"/icons/15.png\" // иконка кода содержимого, то есть типа если бустер прислали - иконка этого бустера\n\t\t\t\t\t}\n\t\t\t\t] \n\t\t\t},\n\t\t\ttimestamp: 1416229351\n\t\t}\n\t}\n}\n",
+          "content": "{\n\tresponse: {\n\t\tdata: {\n\t\t\tuser: {\n\t\t\t\tlives: {\n\t\t\t\t\tnow: 3,\n\t\t\t\t\tunlim_mode: false, // режим бесконечных жизней\n\t\t\t\t\trc_timeout: 1416211047 // next life ReCreation timeout, когда восстановится следующая жизнь\n\t\t\t\t},\n\t\t\t\tboosts: [\n\t\t\t\t\t[12,2],\n\t\t\t\t\t[13,4],\n\t\t\t\t\t[15,1] // 2 буста №12, 4 буста №13 и 1 буст №15\n\t\t\t\t],\n\t\t\t\tmail: [ // только если юзер получил новую почту\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1,\n\t\t\t\t\t\tsender: 87897, // id отправителя, 0 если от администрации, аватар берётся исходя из этого\n\t\t\t\t\t\ttext: \"Прива! Вот те от меня презент =)\",\n\t\t\t\t\t\ttype: 15, // код сообщения, типа \"тебе прислали жизнь\" или \"тебе прислали бустер\"\n\t\t\t\t\t\tcontent_icon: \"/icons/15.png\" // иконка кода содержимого, то есть типа если бустер прислали - иконка этого бустера\n\t\t\t\t\t}\n\t\t\t\t] \n\t\t\t},\n\t\t\ttimestamp: 1416229351\n\t\t}\n\t}\n}\n",
           "type": "json"
         }
       ]
@@ -3419,6 +3419,125 @@
     "title": "send",
     "name": "send",
     "group": "mail",
+    "version": "0.2.6",
+    "description": "<p>Запрос для отправления другому юзеру чего-нибудь (дропа), который тот может через свою почту принять</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "field": "to_user",
+            "optional": false,
+            "description": "<p>id юзера-получателя</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "field": "code",
+            "optional": false,
+            "description": "<p>id типового сообщения. Например, какой-то код может указывать, что данное письмо - запрос на жизнь.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "field": "text",
+            "optional": false,
+            "description": "<p>Текст, который будет в письме</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "field": "drop_json",
+            "optional": false,
+            "description": "<p>Необязательный параметр. Строка, в которой - JSON, в котором массив итемов, которые игрок передаёт своему другу в письме. Эти итемы у него сразу же списываются.</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Пример запроса:",
+        "content": "Пример запроса:\n{\n\tuid: 672943,\n\tauth_key: 2c01c44ec206a65c99ffb0d3ee3bad63,\n\tto_user: 768745,\n\tcode: 5,\n\ttext: \"Вот тебе один бафф номер три, два буста номер пять и четыре жизни\",\n\tdrop_json: [\n\t\t{\n\t\t\tid: 1003,\n\t\t\tcount: 1\n\t\t},\n\t\t{\n\t\t\tid: 2005,\n\t\t\tcount: 2\n\t\t},\n\t\t{\n\t\t\tid: 3001,\n\t\t\tcount: 4\n\t\t}\n\t]\n}\n",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "field": "success",
+            "optional": false,
+            "description": "<p>должен быть всегда true</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Пример ответа:",
+          "content": "Пример ответа:\n{\n\tresponse: {\n\t\tdata: {\n\t\t\tsuccess: true,\n\t\t\tuser: { // только в случае прихода новой почты\n\t\t\t\tmail: [\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1,\n\t\t\t\t\t\tsender: 87897, // id отправителя, 0 если от администрации, аватар берётся исходя из этого\n\t\t\t\t\t\ttext: \"Прива! Вот те от меня презент =)\",\n\t\t\t\t\t\ttype: 15, // код сообщения, типа \"тебе прислали жизнь\" или \"тебе прислали бустер\"\n\t\t\t\t\t\tcontent_icon: \"/icons/15.png\" // иконка кода содержимого, то есть типа если бустер прислали - иконка этого бустера\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t},\n\t\t\ttimestamp: 1416229351\n\t\t}\n\t}\n}\n",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "field": "WrongAuthKey",
+            "optional": false,
+            "description": "<p>неверный auth_key</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "field": "InsufficientInputParameters",
+            "optional": false,
+            "description": "<p>Какой-то из входных параметров отсутствует</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "field": "IncorrectFormat",
+            "optional": false,
+            "description": "<p>Неверный формат параметра drop_json: проверьте, есть ли кавычки вокруг &quot;id&quot; и &quot;count&quot;</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "field": "UserNotFound",
+            "optional": false,
+            "description": "<p>uid, который был передан, не был найден в таблице пользователей. Такого быть не должно, лучший выход - полать запрос init который создаст пустого юзера заново</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "field": "NotEnoughItems",
+            "optional": false,
+            "description": "<p>у юзера недостаточно тех итемов, которые он пытается переслать другу</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "field": "UserDoesNotHaveThisItem",
+            "optional": false,
+            "description": "<p>юзер просто тупо не имеет того итема, который он пытается переслать другу</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "field": "SendFailed",
+            "optional": false,
+            "description": "<p>Дроп отослать не удалось, причина неизвестна</p>"
+          }
+        ]
+      }
+    },
+    "filename": "./controllers/MailController.php"
+  },
+  {
+    "type": "post",
+    "url": "/mail/send",
+    "title": "send",
+    "name": "send",
+    "group": "mail",
     "version": "0.2.0",
     "description": "<p>Запрос для отправления другому юзеру чего-нибудь (дропа), который тот может через свою почту принять</p>",
     "parameter": {
@@ -3530,7 +3649,7 @@
         ]
       }
     },
-    "filename": "./controllers/MailController.php"
+    "filename": "./controllers/_MailController.php"
   },
   {
     "type": "post",
