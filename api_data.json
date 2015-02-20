@@ -2529,7 +2529,7 @@
     "examples": [
       {
         "title": "Пример запроса:",
-        "content": "Пример запроса:\n{\n\tuid: 67829891,\n\tauth_key: 2c01c44ec206a65c99ffb0d3ee3bad63,\n\tlevel_id: 1001,\n\tscore: 57,\n\tadd_turns: 1,\n\tboosts: [{\"id\":1001,\"count\":2}],\n\tbuffs: [{\"id\":1001,\"count\":2}],\n\tscore: 57,\n\tsid: 47\n}\n",
+        "content": "Пример запроса:\n{\n\tuid: 67829891,\n\tauth_key: 2c01c44ec206a65c99ffb0d3ee3bad63,\n\tlevel_id: 1001,\n\tscore: 57,\n\tadd_turns: 1,\n\tboosts: \"[{\"id\":1001,\"count\":2}]\",\n\tbuffs: \"[{\"id\":1001,\"count\":2}]\",\n\tsid: 47\n}\n",
         "type": "json"
       }
     ],
