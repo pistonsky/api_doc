@@ -107,6 +107,212 @@ define({ api: [
     "title": "default",
     "name": "init",
     "group": "init",
+    "version": "0.3.1",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "field": "lang",
+            "optional": false,
+            "description": "<p>Двухбуквенный код языка</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "field": "sex",
+            "optional": false,
+            "description": "<p>Пол, для сбора БД юзеров</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "field": "country",
+            "optional": false,
+            "description": "<p>Страна, текст</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "field": "city",
+            "optional": false,
+            "description": "<p>Город, текстом</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Array",
+            "field": "app_friends",
+            "optional": false,
+            "description": "<p>Список ВК uid друзей пользователя, установивших приложение. Сервер не может его сам взять. Как вариант – список вообще всех друзей пользователя. Тогда на карте будут показываться больше друзей, т.к. будут показываться даже те, кто уже удалил игру.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Array",
+            "field": "friends",
+            "optional": false,
+            "description": "<p>Список ВК uid всех друзей пользователя, не только установивших приложение.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "field": "first_name",
+            "optional": false,
+            "description": "<p>Имя</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "field": "last_name",
+            "optional": false,
+            "description": "<p>Фамилия</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "date",
+            "field": "birthdate",
+            "optional": false,
+            "description": "<p>Дата рождения ДД.ММ.ГГГГ</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "field": "referrer",
+            "optional": false,
+            "description": "<p>это обозначение места откуда пользователь перешёл в приложение</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Пример запроса:",
+        "content": "Пример запроса:\n{\n\tuid: 6709810,\n\tauth_key: 2c01c44ec206a65c99ffb0d3ee3bad63,\n\tlang: \"ru\",\n\tsex: 0,\n\tcountry: \"Russia\",\n\tcity: \"Москва\",\n\tapp_friends: \"7678774,324353,4825225\",\n\tfriends: \"7678774,324353,4825225,8981008\",\n\tfirst_name: \"Александр\",\n\tlast_name: \"Иванов\",\n\tbirthdate: \"11.17.1994\",\n\treferrer: \"user_apps\"\n}\n",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Локаль",
+            "field": "locale",
+            "optional": false,
+            "description": "<p>key-value пары. В коте также грамматические правила прописываются в отдельной флешке и тут возвращается ссылка на нее. Вполне можно засунуть грамматические правила внутрь основной флешки. Неплохо бы сделать это (менеджер локалей) в форме отдельной swc библиотеки.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Массив Банковских Итемов",
+            "field": "bank",
+            "optional": false,
+            "description": "<p>Список всех итемов для покупки за голоса ВК – т.е. кучек внутриигровой валюты, pic_url не передается, он генерируется клиентом по шаблону &quot;/images/bank/{id}.png&quot;</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Юзер",
+            "field": "user",
+            "optional": false,
+            "description": "<p>Информация по текущему юзеру. Как минимум, нужно знать сколько у него денег и на каком он уровне - блокирует</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Массив Юзеров (ограниченный)",
+            "field": "friends",
+            "optional": false,
+            "description": "<p>Список друзей пользователя для отображения их прогресса в игре. Отправляются сразу все друзья в игре.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Массив Юзеров (ограниченный)",
+            "field": "friends_virality",
+            "optional": false,
+            "description": "<p>Список всех друзей пользователя вместе с их привлекательностью в плане приглашения в игру. Отправляются только те друзья, которые были переданы в параметре friends</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Массив Итемов",
+            "field": "items",
+            "optional": false,
+            "description": "<p>Все доступные в игре бусты, буффы и прочие вещи (бонусы к жизням, ходам). Здесь в отличие от магазина хранятся записи об игровых характеристиках итемов.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Объект с константами",
+            "field": "constants",
+            "optional": false,
+            "description": "<p>Все, что настраивается через админку и нужно клиенту</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Массив Зон",
+            "field": "zones",
+            "optional": false,
+            "description": "<p>Присылаем только зону, на которой сейчас юзер +- 1 зона (т.е. 2 или 3 зоны изначально)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Массив Lot",
+            "field": "shop",
+            "optional": false,
+            "description": "<p>Лоты из магазина</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Массив Targeting",
+            "field": "targeting",
+            "optional": false,
+            "description": "<p>Группы таргетинга и их критерии</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "field": "sid",
+            "optional": false,
+            "description": "<p>ID сессии, должен сохраняться на стороне клиента и затем передаваться в каждом запросе</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Пример ответа:",
+          "content": "Пример ответа:\n{\n\tresponse: {\n\t\tdata: {\n\t\t\tlocale: {\n\t\t\t\t\"ru_RU\": {\n\t\t\t\t\t\"welcome.greeting1\": \"Привет, друг!\",\n\t\t\t\t\t\"welcome.greeting2\": \"Привет, дружище!\"\n\t\t\t\t}\n\t\t\t},\n\t\t\tbank: [\n\t\t\t\t{\n\t\t\t\t\tid: 1,\n\t\t\t\t\torder: 1,\n\t\t\t\t\tcoins: 5,\n\t\t\t\t\tvotes: 1\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tid: 2,\n\t\t\t\t\torder: 2,\n\t\t\t\t\tcoins: 15,\n\t\t\t\t\tvotes: 2\n\t\t\t\t}\n\t\t\t],\n\t\t\tuser: {\n\t\t\t\tuid: 577098,\n\t\t\t\tzone_timeout: 1416229411, // если юзер не может пройти 15й уровень, здесь будет время, когда можно уже показывать следующую зону\n\t\t\t\titems: [ // массив итемов уже включает в себя баффы, бусты, жизни и другие разновидности итемов\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1002,\n\t\t\t\t\t\tcount: 2\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 2003,\n\t\t\t\t\t\tcount: 4\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 3001,\n\t\t\t\t\t\tcount: 1\n\t\t\t\t\t}\n\t\t\t\t],\n\t\t\t\treg_date: 1416210047, // timestamp\n\t\t\t\tcoins: 70,\n\t\t\t\tlevel_progress: [\n\t\t\t\t\t[1001,1,5], // id, stars, score\n\t\t\t\t\t[1002,2,10],\n\t\t\t\t\t[2001,3,305]\n\t\t\t\t],\n\t\t\t\tlives: {\n\t\t\t\t\tnow: 3,\n\t\t\t\t\tunlim_mode: false, // режим бесконечных жизней\n\t\t\t\t\tnext_life_time: 1416211047 // next life ReCreation timeout, когда восстановится следующая жизнь\n\t\t\t\t},\n\t\t\t\tbpc: 3, // bank purchase count, сколько раз покупал в банке\n\t\t\t\tvisits: 8, // сколько раз заходил в игру\n\t\t\t\ttype: 0, // 0 - игрок, 1 - админ, 2 - тестер\n\t\t\t\tmail: [\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1,\n\t\t\t\t\t\tsender: 87897, // id отправителя, 0 если от администрации, аватар берётся исходя из этого\n\t\t\t\t\t\ttext: \"Прива! Вот те от меня презент =)\",\n\t\t\t\t\t\ttype: 15, // код сообщения, типа \"тебе прислали жизнь\" или \"тебе прислали бустер\"\n\t\t\t\t\t\tcontent_icon: \"/icons/15.png\" // иконка кода содержимого, то есть типа если бустер прислали - иконка этого бустера\n\t\t\t\t\t}\n\t\t\t\t],\n\t\t\t\tsettings: \"{}\" // точно в таком же виде, как они были переданы в user/settings\n\t\t\t},\n\t\t\tfriends: [\n\t\t\t\t{\n\t\t\t\t\tuid: 7678774,\n\t\t\t\t\tlevel_progress: [\n\t\t\t\t\t\t[1001,1,5],\n\t\t\t\t\t\t[1002,1,10],\t// id, stars, score\n\t\t\t\t\t\t[2001,2,305]\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tuid: 324353,\n\t\t\t\t\tlevel_progress: [\n\t\t\t\t\t\t[1001,1,6],\n\t\t\t\t\t\t[1003,1,5],\n\t\t\t\t\t\t[2002,2,34]\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tuid: 4825225,\n\t\t\t\t\tlevel_progress: [\n\t\t\t\t\t\t[1001,1,6],\n\t\t\t\t\t\t[1003,1,5],\n\t\t\t\t\t\t[2002,2,34]\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t],\n\t\t\tfriends_virality: [\n\t\t\t\t{\n\t\t\t\t\tuid: 7678774,\n\t\t\t\t\tvirality: 89,\n\t\t\t\t\tlast_invited: 1416225351\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tuid: 324353,\n\t\t\t\t\tvirality: 55,\n\t\t\t\t\tlast_invited: 1416239351\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tuid: 4825225,\n\t\t\t\t\tvirality: 32,\n\t\t\t\t\tlast_invited: 1416229354\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tuid: 8981008,\n\t\t\t\t\tvirality: 14,\n\t\t\t\t\tlast_invited: 1416229378\n\t\t\t\t}\n\t\t\t],\n\t\t\titems: [\n\t\t\t\t{\n\t\t\t\t\tid: 1001,\n\t\t\t\t\tvalue: 5, // для тех итемов, которые имеют численное значение\n\t\t\t\t\ttype: 1\n\t\t\t\t},\n\t\t\t\t...\n\t\t\t],\n\t\t\tconstants: {\n\t\t\t\tconstant1: 4,\n\t\t\t\tconstant2: \"some value\"\n\t\t\t},\n\t\t\tzones: [\n\t\t\t\t{\n\t\t\t\t\tid: 1,\n\t\t\t\t\t// name: \"zone.name.1\",\n\t\t\t\t\t// description: \"zone.description.1\",\n\t\t\t\t\t// background: \"/images/maps/map_1.jpg\",\n\t\t\t\t\t// level_background: \"/images/levels/1100.jpg\",\n\t\t\t\t\toverlay: {}, // TODO: об этом - позже\n\t\t\t\t\tlevels: [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\tid: 1001,\n\t\t\t\t\t\t\tstars: \"100,200,300\",\n\t\t\t\t\t\t\titems: [ // список итемов, которые можно использовать на уровне\n\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\tid: 1001,\n\t\t\t\t\t\t\t\t\tmax: 5\n\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\tid: 2001,\n\t\t\t\t\t\t\t\t\tmax: 0 // значит можно использовать сколько хочешь, без ограничения\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t],\n\t\t\t\t\t\t\tcolors: 5, // число цветов на уровне\n\t\t\t\t\t\t\trules: { \t\t\t// условия для прохождения уровня, срабатывает одно из условий - уровень пройден TODO: а если мне нужна сложная схема ((A OR B) AND C) тогда что?\n\t\t\t\t\t\t\t\tscore: 100, // набрал 100 очков\n\t\t\t\t\t\t\t\tbeers: 5 // выпил пять банок пива пока проходил, надо отпустить беднягу\n\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\tdata: \"WW91IGdvZGRhbW4gbW90aGVyZnVja2VyLCB3aHkgYXJlIHlvdSBkZWNvZGluZyBteSBiYXNlNjQgbWVzc2FnZT8/Pw==\" // закодированная в base64 строка\n\t\t\t\t\t\t},\n\t\t\t\t\t\t...\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t],\n\t\t\tshop: [\n\t\t\t\t{\n\t\t\t\t\tid: 1,\n\t\t\t\t\torder: 1,\n\t\t\t\t\tcond: [[1,5],[2,3]], // условия для показа. Массив пар тип-значение\n\t\t\t\t\tcoins: 5, // цена во внутриигровой валюте\n\t\t\t\t}\n\t\t\t],\n\t\t\ttargeting:{\n\t\t\t\t// TODO: определить этот тип\n\t\t\t},\n\t\t\tsid: 1,\n\t\t\ttimestamp: 1416229351\n\t\t}\n\t}\n}\n",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "field": "WrongAuthKey",
+            "optional": false,
+            "description": "<p>неверный auth_key</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "field": "InsufficientInputParameters",
+            "optional": false,
+            "description": "<p>Какой-то из входных параметров отсутствует</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "field": "UserNotFound",
+            "optional": false,
+            "description": "<p>uid, который был передан, не был найден в таблице пользователей. Такого быть не должно, лучший выход - полать запрос init который создаст пустого юзера заново</p>"
+          }
+        ]
+      }
+    },
+    "filename": "./controllers/InitController.php"
+  },
+  {
+    "type": "post",
+    "url": "/init",
+    "title": "default",
+    "name": "init",
+    "group": "init",
     "version": "0.3.0",
     "parameter": {
       "fields": {
@@ -305,7 +511,7 @@ define({ api: [
         ]
       }
     },
-    "filename": "./controllers/InitController.php"
+    "filename": "./controllers/_InitController.php"
   },
   {
     "type": "post",
@@ -2692,7 +2898,7 @@ define({ api: [
     "examples": [
       {
         "title": "Пример запроса:",
-        "content": "Пример запроса:\n{\n\tlevel_id: 1001,\n\tbuffs: [[1,1],[2,1],[3,5]] // Игрок взял один бафф №1, один бафф №2, и пять баффов №3\n}\n",
+        "content": "Пример запроса:\n{\n\tuid: 676763081,\n\tauth_key: 2c01c44ec206a65c99ffb0d3ee3bad63,\n\tlevel_id: 1001,\n\tbuffs: [[1,1],[2,1],[3,5]] // Игрок взял один бафф №1, один бафф №2, и пять баффов №3\n}\n",
         "type": "json"
       }
     ],
@@ -2718,7 +2924,7 @@ define({ api: [
       "examples": [
         {
           "title": "\t{",
-          "content": "\t{\n\tresponse: {\n\t\tdata: {\n\t\t\tuser: {\n\t\t\t\tbuffs: [\n\t\t\t\t\t[3,5],\n\t\t\t\t\t[4,7] // 5 бафов №3, и 7 бафов №4\n\t\t\t\t],\n\t\t\t\tcoins: 70,\n\t\t\t\tlives: {\n\t\t\t\t\tnow: 3,\n\t\t\t\t\tmax: 8, // максимум жизней\n\t\t\t\t\tunlim_mode: false, // режим бесконечных жизней\n\t\t\t\t\trc_timeout: 1416211047 // next life ReCreation timeout, когда восстановится следующая жизнь\n\t\t\t\t},\n\t\t\t\tmail: [\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1,\n\t\t\t\t\t\tsender: 87897, // id отправителя, 0 если от администрации, аватар берётся исходя из этого\n\t\t\t\t\t\ttext: \"Прива! Вот те от меня презент =)\",\n\t\t\t\t\t\ttype: 15, // код сообщения, типа \"тебе прислали жизнь\" или \"тебе прислали бустер\"\n\t\t\t\t\t\tcontent_icon: \"/icons/15.png\" // иконка кода содержимого, то есть типа если бустер прислали - иконка этого бустера\n\t\t\t\t\t}\n\t\t\t\t] \n\t\t\t},\n\t\t\tattempt: 1\n\t\t}\n\t}\n}\n",
+          "content": "\t{\n\tresponse: {\n\t\tdata: {\n\t\t\tuser: {\n\t\t\t\tbuffs: [\n\t\t\t\t\t[3,5],\n\t\t\t\t\t[4,7] // 5 бафов №3, и 7 бафов №4\n\t\t\t\t],\n\t\t\t\tcoins: 70,\n\t\t\t\tlives: {\n\t\t\t\t\tnow: 3,\n\t\t\t\t\tunlim_mode: false, // режим бесконечных жизней\n\t\t\t\t\trc_timeout: 1416211047 // next life ReCreation timeout, когда восстановится следующая жизнь\n\t\t\t\t},\n\t\t\t\tmail: [ // почта только если пришло новое письмо\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1,\n\t\t\t\t\t\tsender: 87897, // id отправителя, 0 если от администрации, аватар берётся исходя из этого\n\t\t\t\t\t\ttext: \"Прива! Вот те от меня презент =)\",\n\t\t\t\t\t\ttype: 15, // код сообщения, типа \"тебе прислали жизнь\" или \"тебе прислали бустер\"\n\t\t\t\t\t\tcontent_icon: \"/icons/15.png\" // иконка кода содержимого, то есть типа если бустер прислали - иконка этого бустера\n\t\t\t\t\t}\n\t\t\t\t] \n\t\t\t},\n\t\t\tattempt: 1,\n\t\t\ttimestamp: 1416229351\n\t\t}\n\t}\n}\n",
           "type": "json"
         }
       ]
@@ -2756,7 +2962,7 @@ define({ api: [
     "examples": [
       {
         "title": "Пример запроса:",
-        "content": "Пример запроса:\n{\n\tuid: 676763081,\n\tauth_key: 2c01c44ec206a65c99ffb0d3ee3bad63,\n\tlevel_id: 1001,\n\tbuffs: [[1,1],[2,1],[3,5]] // Игрок взял один бафф №1, один бафф №2, и пять баффов №3\n}\n",
+        "content": "Пример запроса:\n{\n\tlevel_id: 1001,\n\tbuffs: [[1,1],[2,1],[3,5]] // Игрок взял один бафф №1, один бафф №2, и пять баффов №3\n}\n",
         "type": "json"
       }
     ],
@@ -2782,7 +2988,7 @@ define({ api: [
       "examples": [
         {
           "title": "\t{",
-          "content": "\t{\n\tresponse: {\n\t\tdata: {\n\t\t\tuser: {\n\t\t\t\tbuffs: [\n\t\t\t\t\t[3,5],\n\t\t\t\t\t[4,7] // 5 бафов №3, и 7 бафов №4\n\t\t\t\t],\n\t\t\t\tcoins: 70,\n\t\t\t\tlives: {\n\t\t\t\t\tnow: 3,\n\t\t\t\t\tunlim_mode: false, // режим бесконечных жизней\n\t\t\t\t\trc_timeout: 1416211047 // next life ReCreation timeout, когда восстановится следующая жизнь\n\t\t\t\t},\n\t\t\t\tmail: [ // почта только если пришло новое письмо\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1,\n\t\t\t\t\t\tsender: 87897, // id отправителя, 0 если от администрации, аватар берётся исходя из этого\n\t\t\t\t\t\ttext: \"Прива! Вот те от меня презент =)\",\n\t\t\t\t\t\ttype: 15, // код сообщения, типа \"тебе прислали жизнь\" или \"тебе прислали бустер\"\n\t\t\t\t\t\tcontent_icon: \"/icons/15.png\" // иконка кода содержимого, то есть типа если бустер прислали - иконка этого бустера\n\t\t\t\t\t}\n\t\t\t\t] \n\t\t\t},\n\t\t\tattempt: 1,\n\t\t\ttimestamp: 1416229351\n\t\t}\n\t}\n}\n",
+          "content": "\t{\n\tresponse: {\n\t\tdata: {\n\t\t\tuser: {\n\t\t\t\tbuffs: [\n\t\t\t\t\t[3,5],\n\t\t\t\t\t[4,7] // 5 бафов №3, и 7 бафов №4\n\t\t\t\t],\n\t\t\t\tcoins: 70,\n\t\t\t\tlives: {\n\t\t\t\t\tnow: 3,\n\t\t\t\t\tmax: 8, // максимум жизней\n\t\t\t\t\tunlim_mode: false, // режим бесконечных жизней\n\t\t\t\t\trc_timeout: 1416211047 // next life ReCreation timeout, когда восстановится следующая жизнь\n\t\t\t\t},\n\t\t\t\tmail: [\n\t\t\t\t\t{\n\t\t\t\t\t\tid: 1,\n\t\t\t\t\t\tsender: 87897, // id отправителя, 0 если от администрации, аватар берётся исходя из этого\n\t\t\t\t\t\ttext: \"Прива! Вот те от меня презент =)\",\n\t\t\t\t\t\ttype: 15, // код сообщения, типа \"тебе прислали жизнь\" или \"тебе прислали бустер\"\n\t\t\t\t\t\tcontent_icon: \"/icons/15.png\" // иконка кода содержимого, то есть типа если бустер прислали - иконка этого бустера\n\t\t\t\t\t}\n\t\t\t\t] \n\t\t\t},\n\t\t\tattempt: 1\n\t\t}\n\t}\n}\n",
           "type": "json"
         }
       ]
@@ -4985,6 +5191,159 @@ define({ api: [
   },
   {
     "type": "post",
+    "url": "/user/settings",
+    "title": "",
+    "name": "settings",
+    "group": "user",
+    "version": "0.3.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "field": "settings",
+            "optional": false,
+            "description": "<p>Необязательный параметр. Если задан - перезаписывает поле settings в юзере. Формат не имеет значения.</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Пример запроса:",
+        "content": "Пример запроса:\n{\n\tuid: \"6709810\",\n\tauth_key: \"2c01c44ec206a65c99ffb0d3ee3bad63\",\n\tsettings: \"{\\\"sound\\\":true}\"\n}\n",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Настройки",
+            "field": "settings",
+            "optional": false,
+            "description": "<p>Содержимое поля settings в юзере, фактически как оно было передано</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Пример ответа:",
+          "content": "Пример ответа:\n{\n\tresponse: {\n\t\tdata: {\n\t\t\tsettings: \"{\\\"sound\\\":true}\"\n\t\t}\n\t}\n}\n",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "field": "WrongAuthKey",
+            "optional": false,
+            "description": "<p>неверный auth_key</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "field": "InsufficientInputParameters",
+            "optional": false,
+            "description": "<p>отсутствует параметр uid либо auth_key</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "field": "UserNotFound",
+            "optional": false,
+            "description": "<p>uid, который был передан, не был найден в таблице пользователей. Такого быть не должно, лучший выход - полать запрос init который создаст пустого юзера заново</p>"
+          }
+        ]
+      }
+    },
+    "filename": "./controllers/UserController.php"
+  },
+  {
+    "type": "post",
+    "url": "/virality/invite",
+    "title": "",
+    "name": "invite",
+    "group": "virality",
+    "version": "0.3.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "field": "invited_id",
+            "optional": false,
+            "description": "<p>uid друга, которому выслали приглашение</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Array",
+            "field": "friends",
+            "optional": false,
+            "description": "<p>Список ВК uid всех друзей пользователя.</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Пример запроса:",
+        "content": "Пример запроса:\n{\n\tuid: \"6709810\",\n\tauth_key: \"2c01c44ec206a65c99ffb0d3ee3bad63\",\n\tinvited_id: \"7678774\",\n\tfriends: \"7678774,324353,4825225,8981008\"\n}\n",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Массив Юзеров (ограниченный)",
+            "field": "friends_virality",
+            "optional": false,
+            "description": "<p>Список всех друзей пользователя вместе с их привлекательностью в плане приглашения в игру. Отправляются только те друзья, которые были переданы в параметре friends либо если friends был пуст - он берется из friends_list юзера в базе</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Пример ответа:",
+          "content": "Пример ответа:\n{\n\tresponse: {\n\t\tdata: {\n\t\t\tfriends_virality: [\n\t\t\t\t{\n\t\t\t\t\tuid: 7678774,\n\t\t\t\t\tvirality: 89,\n\t\t\t\t\tlast_invited: 1416225351,\n\t\t\t\t\tcount: 4 \t\t\t\t\t// сколько раз его уже приглашали (причем не важно кто конкретно)\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tuid: 324353,\n\t\t\t\t\tvirality: 55,\n\t\t\t\t\tlast_invited: 1416239351,\n\t\t\t\t\tcount: 3\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tuid: 4825225,\n\t\t\t\t\tvirality: 32,\n\t\t\t\t\tlast_invited: 1416229354,\n\t\t\t\t\tcount: 3\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tuid: 8981008,\n\t\t\t\t\tvirality: 14,\n\t\t\t\t\tlast_invited: 1416229378,\n\t\t\t\t\tcount: 0\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t}\n}\n",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "field": "WrongAuthKey",
+            "optional": false,
+            "description": "<p>неверный auth_key</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "field": "InsufficientInputParameters",
+            "optional": false,
+            "description": "<p>отсутствует параметр invited_id</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "field": "UserNotFound",
+            "optional": false,
+            "description": "<p>uid, который был передан, не был найден в таблице пользователей. Такого быть не должно, лучший выход - полать запрос init который создаст пустого юзера заново</p>"
+          }
+        ]
+      }
+    },
+    "filename": "./controllers/ViralityController.php"
+  },
+  {
+    "type": "post",
     "url": "/virality/invite",
     "title": "",
     "name": "invite",
@@ -5061,7 +5420,7 @@ define({ api: [
         ]
       }
     },
-    "filename": "./controllers/ViralityController.php"
+    "filename": "./controllers/_ViralityController.php"
   },
   {
     "type": "post",
@@ -5149,7 +5508,7 @@ define({ api: [
     "title": "callback",
     "name": "callback",
     "group": "vk",
-    "version": "0.2.5",
+    "version": "0.3.0",
     "description": "<p>Это коллбек для API платежей ВКонтакте, ссылка на него устанавливается в настройках приложения. Здесь все как по API вконтакте, и вызывается оно тоже только сервером ВК. Надо сохранять все id платежей, которые нам ВК присылает.</p>",
     "filename": "./controllers/VkController.php"
   },
